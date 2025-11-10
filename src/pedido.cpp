@@ -4,22 +4,17 @@ using namespace std;
 
 int Pedido::contadorPedidos = 0;
 
-// ----- ARCHIVO CORREGIDO -----
-// El orden de inicialización (fecha, empleado, proveedor)
-// ahora coincide con el orden de declaración en pedido.h
-// para eliminar la advertencia -Wreorder
 Pedido::Pedido(Empleado* emp, Proveedor* prov, const string& fecha)
     : fecha(fecha), empleado(emp), proveedor(prov) {
     nroPedido = ++contadorPedidos;
 }
 
 Pedido::~Pedido() {
-    // Elimina items (Composición - Pedido es dueño de sus items)
+    
     for (auto item : items) {
         delete item;
     }
     items.clear();
-    // NO elimina empleado ni proveedor (Agregación)
 }
 
 void Pedido::agregarItem(Articulo* articulo, int cantidad) {
