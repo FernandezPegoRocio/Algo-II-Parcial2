@@ -1,20 +1,20 @@
 #include "../include/gestordecompra.h"
-#include <iomanip> // Para std::setw, std::setprecision
-#include <iostream> // Para std::cout, std::endl
+#include <iomanip> 
+#include <iostream>
 
 using namespace std;
 
 GestorDeCompra::GestorDeCompra() {}
 
 GestorDeCompra::~GestorDeCompra() {
-    // Elimina todos los objetos creados (RAII)
+
     for (auto pedido : pedidos) delete pedido;
     for (auto proveedor : proveedores) delete proveedor;
     for (auto empleado : empleados) delete empleado;
     for (auto articulo : articulos) delete articulo;
 }
 
-// --- MÉTODOS PRIVADOS DE BÚSQUEDA ---
+
 
 Articulo* GestorDeCompra::buscarArticulo(const string& id) const {
     for (auto art : articulos) {
@@ -44,7 +44,6 @@ Proveedor* GestorDeCompra::buscarProveedor(const string& id) const {
 }
 
 
-// --- CRUD ARTÍCULOS ---
 
 void GestorDeCompra::crearArticulo(const string& id, const string& nombre, double precio) {
     Articulo* nuevo = new Articulo(id, nombre, precio);
@@ -63,7 +62,6 @@ void GestorDeCompra::listarArticulos() const {
     }
 }
 
-// --- CRUD EMPLEADOS ---
 
 void GestorDeCompra::crearEmpleado(const string& id, const string& nombre, const string& apellido) {
     Empleado* nuevo = new Empleado(id, nombre, apellido);
@@ -80,7 +78,6 @@ void GestorDeCompra::listarEmpleados() const {
     }
 }
 
-// --- CRUD PROVEEDORES (COMPLETO) ---
 
 void GestorDeCompra::crearProveedor(const string& id, const string& nombre, const string& cuit) {
     Proveedor* nuevo = new Proveedor(id, nombre, cuit);
@@ -123,8 +120,8 @@ void GestorDeCompra::actualizarProveedor(const string& id, const string& nuevoNo
 void GestorDeCompra::eliminarProveedor(const string& id) {
     for (auto it = proveedores.begin(); it != proveedores.end(); ++it) {
         if ((*it)->getId() == id) {
-            delete *it; // Libera la memoria
-            proveedores.erase(it); // Elimina el puntero del vector
+            delete *it; 
+            proveedores.erase(it); 
             cout << "Proveedor eliminado correctamente." << endl;
             return;
         }
@@ -132,8 +129,6 @@ void GestorDeCompra::eliminarProveedor(const string& id) {
     cout << "Proveedor no encontrado." << endl;
 }
 
-
-// --- GESTIÓN DE PEDIDOS ---
 
 void GestorDeCompra::crearPedido(const string& idEmpleado, const string& idProveedor,
                                const string& fecha, const vector<pair<string, int>>& articulosCantidad) {
@@ -205,27 +200,21 @@ void GestorDeCompra::mostrarPedidos() const {
     }
 }
 
-
-// --- CARGA DE DATOS INICIALES (HARDCODEADO) ---
-
 void GestorDeCompra::cargarDatosIniciales() {
     cout << "\n=== Cargando datos iniciales ===" << endl;
     
-    // Cargar Proveedores
     crearProveedor("P001", "Cauchos del Norte SA", "20-33445566-7");
     crearProveedor("P002", "Gomas Industriales SA", "20-44556677-8");
     crearProveedor("P003", "Proveedora Central", "20-55667788-9");
 
-    // Cargar Articulos
     crearArticulo("A001", "Goma Natural Premium", 1500.00);
     crearArticulo("A002", "Goma Sintetica Standard", 1200.00);
     crearArticulo("A003", "Adhesivo para Goma", 850.00);
     crearArticulo("A004", "Molde de Neumatico", 3500.00);
 
-    // Cargar Empleados
-    crearEmpleado("E001", "Juan", "Perez");
-    crearEmpleado("E002", "Maria", "Gonzalez");
-    crearEmpleado("E003", "Carlos", "Rodriguez");
+    crearEmpleado("E001", "Don", "Gomitas");
+    crearEmpleado("E002", "Marco", "Polo");
+    crearEmpleado("E003", "Armando", "Lio");
     
     cout << "\n=== Datos iniciales cargados ===" << endl;
 }

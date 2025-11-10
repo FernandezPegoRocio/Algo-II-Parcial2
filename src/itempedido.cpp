@@ -12,7 +12,7 @@ ItemPedido::ItemPedido(Articulo* art, int cant)
 }
 
 ItemPedido::~ItemPedido() {
-    // No eliminamos 'articulo' aquí porque ItemPedido no es su dueño.
+   
 }
 
 double ItemPedido::calcularSubtotal() const {

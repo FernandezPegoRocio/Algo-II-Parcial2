@@ -3,11 +3,10 @@
 #include <limits> 
 #include <string>
 #include <vector>
-#include <utility> // Para std::pair y std::make_pair
+#include <utility> 
 
 using namespace std;
 
-// --- FUNCIONES AUXILIARES ---
 
 void limpiarBuffer() {
     cin.clear();
@@ -18,8 +17,6 @@ void pausar() {
     cout << "\nPresione Enter para continuar...";
     cin.get();
 }
-
-// --- MENUS ---
 
 void mostrarMenuPrincipal() {
     cout << "\n========================================" << endl;
@@ -49,8 +46,6 @@ void mostrarMenuCRUDProveedores() {
     cout << "0. Volver" << endl;
     cout << "Seleccione una opcion: ";
 }
-
-// --- OPERACIONES DE CARGA ---
 
 void opcionCargarArticulo(GestorDeCompra& gestor) {
     string id, nombre;
@@ -96,21 +91,17 @@ void opcionCrearPedido(GestorDeCompra& gestor) {
 
     cout << "\n=== CREAR PEDIDO ===" << endl;
 
-    // Seleccionar empleado
     gestor.listarEmpleados();
     cout << "\nID del Empleado: ";
     getline(cin, idEmpleado);
 
-    // Seleccionar proveedor
     gestor.listarProveedores();
     cout << "\nID del Proveedor: ";
     getline(cin, idProveedor);
 
-    // Ingresar fecha
     cout << "Fecha (YYYY-MM-DD): ";
     getline(cin, fecha);
 
-    // Agregar articulos
     gestor.listarArticulos();
     char continuar = 's';
     while (continuar == 's' || continuar == 'S') {
@@ -131,7 +122,6 @@ void opcionCrearPedido(GestorDeCompra& gestor) {
     gestor.crearPedido(idEmpleado, idProveedor, fecha, items);
 }
 
-// --- OPERACIONES CRUD PROVEEDORES ---
 
 void crudCrearProveedor(GestorDeCompra& gestor) {
     string id, nombre, cuit;
@@ -188,8 +178,6 @@ void opcionCRUDProveedores(GestorDeCompra& gestor) {
     } while (opcionCRUD != 0);
 }
 
-
-// --- MAIN ---
 
 int main() {
     GestorDeCompra gestor;

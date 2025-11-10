@@ -13,10 +13,10 @@ private:
     int nroPedido;
     std::string fecha;
     
-    Empleado* empleado;   // Agregación
-    Proveedor* proveedor; // Agregación
+    Empleado* empleado;   
+    Proveedor* proveedor; 
     
-    std::vector<ItemPedido*> items; // Composición
+    std::vector<ItemPedido*> items; 
 
 public:
     Pedido(Empleado* emp, Proveedor* prov, const std::string& fecha);
